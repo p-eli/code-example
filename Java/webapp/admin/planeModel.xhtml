@@ -1,0 +1,111 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        template="template.xhtml">
+    <ui:param name="pageTitle" value="airport"/>
+    <ui:define name="content">
+        <div class="page_title">
+            Přehled všech modelů letadel
+        </div>
+
+        <b:growl id="growl" globalOnly="true"/>
+        <b:form>
+            <b:panelGrid columns="4" styleClass="filter-form">
+                <h:selectOneMenu value="#{planeModelFilter.manufacturer}">
+                    <f:selectItem itemValue="" itemLabel="Výrobce"/>
+                    <f:selectItems value="#{planeModelDatatable.manufacturerAll}" var="currentPlane"
+                                   itemValue="#{currentPlane}" itemLabel="#{currentPlane}"/>
+                    <f:ajax listener="#{planeModelDatatable.refresh}" render=":frmPlaneType @form"/>
+                </h:selectOneMenu>
+
+                <h:selectOneMenu value="#{planeModelFilter.type}">
+                    <f:selectItem itemValue="" itemLabel="Typ Letadla"/>
+                    <f:selectItems value="#{planeModelDatatable.type}" var="currentPlaneType"
+                                   itemValue="#{currentPlane}" itemLabel="#{currentPlane}"/>
+                    <f:ajax listener="#{planeModelDatatable.refresh}" render=":frmPlaneType @form"/>
+                </h:selectOneMenu>
+
+                <h:selectOneMenu value="#{planeModelFilter.capacity}">
+                    <f:selectItem itemValue="-1" itemLabel="Kapacita"/>
+                    <f:selectItems value="#{planeModelDatatable.capacity}" var="currentPlaneType"
+                                   itemValue="#{currentPlane}" itemLabel="#{currentPlane}"/>
+                    <f:ajax listener="#{planeModelDatatable.refresh}" render=":frmPlaneType @form"/>
+                </h:selectOneMenu>
+
+                <h:selectOneMenu value="#{planeModelFilter.enginePower}">
+                    <f:selectItem itemValue="-1" itemLabel="Výkon motoru"/>
+                    <f:selectItems value="#{planeModelDatatable.enginePower}" var="currentPlaneType"
+                                   itemValue="#{currentPlane}" itemLabel="#{currentPlane}"/>
+                    <f:ajax listener="#{planeModelDatatable.refresh}" render=":frmPlaneType @form"/>
+                </h:selectOneMenu>
+            </b:panelGrid>
+        </b:form>
+
+
+        <b:form id="frmPlaneType">
+            <b:dataTable value="#{planeModelDatatable.values}" var="plt"
+                         customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Czech.json">
+                <h:column styleClass="table_id" sortBy="#{plt.id}">
+                    <f:facet name="header">ID</f:facet>
+                    #{plt.id}
+                </h:column>
+                <h:column styleClass="table_item" sortBy="#{plt.type}">
+                    <f:facet name="header">Typ</f:facet>
+                    #{plt.type}
+                </h:column>
+                <h:column styleClass="table_item" sortBy="#{plt.manufacturer}">
+                    <f:facet name="header">Výrobce</f:facet>
+                    #{plt.manufacturer}
+                </h:column>
+                <h:column styleClass="table_item" sortBy="#{plt.capacity}">
+                    <f:facet name="header">Kapacita</f:facet>
+                    #{plt.capacity}
+                </h:column>
+                <h:column styleClass="table_item" sortBy="#{plt.enginePower}">
+                    <f:facet name="header">Výkon motoru</f:facet>
+                    #{plt.enginePower}
+                </h:column>
+
+                <h:column class="table_item">
+                    <f:facet name="header">&#160;</f:facet>
+                    <b:commandButton action="#{planeController.showPlane(plt.id)}"
+                                     styleClass="table_button"
+                                     value="Zobrazit Letadla"
+                                     look="info"
+                                     disabled="#{!(authenticationBean.technicianOrAdmin)}"/>
+
+                    <b:commandButton value=""
+                                     styleClass="table_button"
+                                     id="edit-button"
+                                     look="warning"
+                                     icon="edit"
+                                     action="#{editPlaneModelController.showPlaneModelEdit(plt.id)}"
+                                     disabled="#{!(authenticationBean.admin)}"/>
+
+                    <b:commandButton value=""
+                                     styleClass="table_button"
+                                     id="delete-button"
+                                     look="danger"
+                                     icon="trash"
+                                     action="#{planeModelController.remove(plt)}"
+                                     disabled="#{!(authenticationBean.admin)}"/>
+                </h:column>
+            </b:dataTable>
+        </b:form>
+        <b:form>
+            <b:commandButton id="lnkHidden" value="Přidat nový typ letadla"
+                             styleClass="action-button"
+                             icon="plus"
+                             look="primary"
+                             action="#{editPlaneModelController.showPlaneModelEdit}"
+                             disabled="#{!(authenticationBean.admin)}"/>
+            <b:commandButton styleClass="action-button"
+                             look="primary"
+                             action="#{planeController.showPlane()}"
+                             value="Zobrazit všechna letadla"/>
+        </b:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,54 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        template="template.xhtml">
+    <ui:param name="pageTitle" value="airport"/>
+    <ui:define name="content">
+        <b:growl id="growl" globalOnly="true"/>
+        <div class="no-print protocol-buttons">
+            <a class="print-protocol" onclick="window.print(); return false;" href="#print">Vytisknout</a>| <a
+                class="back-protocol" onclick="window.history.back(); return false;" href="#back">Zpět</a>
+        </div>
+        <div class="page_title">
+            Protokol testu:
+        </div>
+        <c:if test="#{planeResultData.testSet}">
+
+            <b:dataTable value="#{planeResultData.testSummary}" var="sum" styleClass="test-values"
+                         customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Czech.json">
+                <h:column>
+                    <f:facet name="header">#{sum.left}</f:facet>
+                    #{sum.left}
+                </h:column>
+                <h:column>
+                    <f:facet name="value">#{sum.right}</f:facet>
+                    #{sum.right}
+                </h:column>
+            </b:dataTable>
+
+            <b:dataTable value="#{planeResultData.results}" var="result" styleClass="result-values"
+                         customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Czech.json">
+
+                <h:column sortBy="#{result.res.checkingValue.checkingValue}">
+                    <f:facet name="header">Testovaná vlastnost</f:facet>
+                    #{result.res.checkingValue.checkingValue}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Optimální hodnoty</f:facet>
+                    #{result.res.checkingValue.min} .. #{result.res.checkingValue.max}
+                </h:column>
+
+
+                <h:column styleClass="#{result.css}">
+                    <f:facet name="header">Naměřeno</f:facet>#{result.res.resultValue}
+                </h:column>
+
+            </b:dataTable>
+        </c:if>
+    </ui:define>
+</ui:composition>

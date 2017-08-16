@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+>
+
+<ui:composition template="template.xhtml">
+    <ui:define name="content">
+
+        <b:growl id="growl" globalOnly="true"/>
+
+        <c:choose>
+            <c:when test="#{authenticationBean.admin}">
+                <b:form>
+                    <b:container layout="fluid">
+                        <b:row>
+                            <b:column span="4">
+                                <b:well styleClass="shortcut-well">
+                                    <b:commandButton
+                                            styleClass="action-button"
+                                            value="Přidat nové letadlo"
+                                            action="#{editPlaneController.showPlaneEdit}">
+                                        <b:icon styleClass="shortcut-icon" name="plane" size="5x"/><br/>
+                                    </b:commandButton>
+                                </b:well>
+                            </b:column>
+
+                            <b:column span="4">
+                                <b:well styleClass="shortcut-well">
+                                    <b:commandButton value="Přidat nového uživatele"
+                                                     styleClass="action-button"
+                                                     action="#{editUserController.create}">
+                                        <b:icon styleClass="shortcut-icon" name="user" size="5x"/><br/>
+                                    </b:commandButton>
+                                </b:well>
+                            </b:column>
+
+                            <b:column span="4">
+                                <b:well styleClass="shortcut-well">
+
+                                    <b:commandButton value="Přidat novou šablonu testu"
+                                                     styleClass="action-button"
+                                                     action="#{editTestTypeController.showTestTypeEdit()}">
+                                        <b:icon styleClass="shortcut-icon" name="list-alt" size="5x"/><br/>
+                                    </b:commandButton>
+                                </b:well>
+                            </b:column>
+                        </b:row>
+                    </b:container>
+                </b:form>
+            </c:when>
+
+            <c:when test="#{authenticationBean.technician}">
+                <b:form>
+                    <b:container layout="fluid">
+                        <b:row>
+                            <b:column span="4">
+                                <b:well styleClass="shortcut-well">
+                                    <b:commandButton
+                                            styleClass="action-button"
+                                            value="Zobrazit všechna letadla"
+                                            action="#{planeController.showPlane}">
+                                        <b:icon styleClass="shortcut-icon" name="plane" size="5x"/>
+                                        <br/>
+                                    </b:commandButton>
+                                </b:well>
+                            </b:column>
+
+                            <b:column span="4">
+                                <b:well styleClass="shortcut-well">
+                                    <b:commandButton value="Zobrazit provedené testy"
+                                                     styleClass="action-button"
+                                                     action="#{testController.showTests}">
+                                        <b:icon styleClass="shortcut-icon" name="list-alt" size="5x"/><br/>
+                                    </b:commandButton>
+
+                                </b:well>
+                            </b:column>
+
+                            <b:column span="4">
+                                <b:well styleClass="shortcut-well">
+                                    <b:commandButton value="Provést nový test"
+                                                     styleClass="action-button"
+                                                     action="#{testCreateController.create}">
+                                        <b:icon styleClass="shortcut-icon" name="check" size="5x"/><br/>
+                                    </b:commandButton>
+                                </b:well>
+                            </b:column>
+                        </b:row>
+                    </b:container>
+                </b:form>
+            </c:when>
+
+            <c:when test="#{!(authenticationBean.technicianOrAdmin)}">
+                <b:form>
+                    <b:container layout="fluid">
+                        <b:row>
+                            <b:column span="4">
+                                <b:well styleClass="shortcut-well">
+                                    <b:commandButton
+                                            styleClass="action-button"
+                                            value="Zobrazit všechna letadla"
+                                            action="#{planeController.showPlane}">
+                                        <b:icon styleClass="shortcut-icon" name="plane" size="5x"/><br/>
+                                    </b:commandButton>
+                                </b:well>
+                            </b:column>
+
+                            <b:column span="4">
+                                <b:well styleClass="shortcut-well">
+                                    <b:commandButton value="Zobrazit provedené testy"
+                                                     styleClass="action-button"
+                                                     action="#{testController.showTests}">
+                                        <b:icon styleClass="shortcut-icon" name="list-alt" size="5x"/><br/>
+                                    </b:commandButton>
+                                </b:well>
+                            </b:column>
+
+                            <b:column span="4">
+                                <b:well styleClass="shortcut-well">
+                                    <b:commandButton value="Zobrazit všechny uživatele"
+                                              styleClass="action-button"
+                                              action="#{editUserController.list}">
+                                        <b:icon styleClass="shortcut-icon" name="user" size="5x"/><br/>
+                                    </b:commandButton>
+                                </b:well>
+                            </b:column>
+                        </b:row>
+                    </b:container>
+                </b:form>
+            </c:when>
+
+            <c:otherwise>
+
+            </c:otherwise>
+        </c:choose>
+
+
+    </ui:define>
+</ui:composition>
+</html>

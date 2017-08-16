@@ -1,0 +1,20 @@
+Project: Patnáctka
+Author: Jakub Pelikán
+Login:  xpelik14
+Date:  16.5.2016
+
+Program k prohledávání stavového prostoru používá algoritmus A* doplněný o frontu Close a jako heuristickou funkci používá součet manhattanských vzdáleností kamenů od cílových pozic. Rešení obsahuje i další používánou heuristickou funkci, která počítá počet kamenů na nesprávných pozicich, tato metrika dosahuje pro řešení s malým počtem kroků lepších časových výsledků, ale pro vícekrokové řešení má výrazně horší časové výsledky. 
+Program také, kontroluje korektnost vstupu, zdali neobsahuje čísla mimo posloupnost, nebo opakující se čísla a zdali všechny řádky mají stejnou délku. 
+
+VOLBA HEURISTIKÉ FUNKCE:
+    Volba heur. funkce se provádí pomocí odkomentování/zakomentování příslušných řádků.
+    -řádek 276 -heuristika pomocí manhattanských vzdáleností => Standardně používáno
+    -řádek 277 -heuristika pomocí počtu kamenů na nesprávných místech
+
+TESTOVACÍ VSTUPY:  (cas: heur. manhaton / heur. pocet spatne umistenych kamenu)
+    input_15step - 0.06/0.03  sekund    
+    input_20step - 0.2/0.06  sekund    
+    input_25step - 1.8/11.3  sekund
+    input_30step - 60.0 sekund / 202 minut
+    input_35step - 106 minut / --
+    

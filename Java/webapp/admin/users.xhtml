@@ -1,0 +1,64 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        template="template.xhtml">
+    <ui:param name="pageTitle" value="airport"/>
+    <ui:define name="content">
+        <b:growl id="growl" globalOnly="true"/>
+        <div class="page_title">
+            Uživatelé
+        </div>
+        <b:form id="frmEmployees">
+            <b:dataTable value="#{usersDatatable.values}" var="user" styleClass="show-table"
+                         customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Czech.json">
+
+                <h:column sortBy="#{user.id}" styleClass="table_id">
+                    <f:facet name="header">ID uživatele</f:facet>
+                    <h:link value="#{user.id}" outcome="employee">
+                        <f:param name="empid" value="#{user.id}"/>
+                    </h:link>
+                </h:column>
+
+                <h:column sortBy="#{user.login}" styleClass="table_item">
+                    <f:facet name="header">Login</f:facet>
+                    #{user.login}
+                </h:column>
+
+                <h:column sortBy="#{user.type}" styleClass="table_item">
+                    <f:facet name="header">Role</f:facet>
+                    #{user.type.printable}
+                </h:column>
+
+                <h:column sortBy="#{user.firstname}" styleClass="table_item">
+                    <f:facet name="header">Jméno</f:facet>
+                    #{user.firstname}
+                </h:column>
+                <h:column sortBy="#{user.lastname}" styleClass="table_item">
+                    <f:facet name="header">Příjmení</f:facet>
+                    #{user.lastname}
+                </h:column>
+
+                <h:column width="80" style="text-align: center" styleClass="table_item">
+                    <f:facet name="header">&#160;</f:facet>
+                    <b:commandButton value=""
+                                     styleClass="table_button"
+                                     look="warning"
+                                     icon="edit"
+                                     action="#{editUserController.update(user)}"
+                                     disabled="#{!(authenticationBean.admin)}"/>
+
+                    <b:commandButton value=""
+                                     styleClass="table_button"
+                                     look="danger"
+                                     icon="trash"
+                                     action="#{editUserController.remove(user)}"
+                                     disabled="#{!(authenticationBean.admin)}"/>
+                </h:column>
+
+            </b:dataTable>
+        </b:form>
+    </ui:define>
+</ui:composition>

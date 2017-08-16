@@ -1,0 +1,107 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+        template="template.xhtml">
+
+    <ui:param name="pageTitle" value="#{userForm.user.id}"/>
+    <ui:define name="content">
+
+        <c:choose>
+            <c:when test="#{userForm.isNew}">
+                <div class="page_title">
+                    Vytvoření nového uživatele
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="page_title">
+                    Úprava uživatele <h:outputText value="#{userForm.user.login}"/>
+                </div>
+            </c:otherwise>
+        </c:choose>
+
+        <b:form id="frmPlaneTypeNew" styleClass="edit-form">
+            <b:panelGrid columns="3">
+
+                <p:outputLabel for="login" value="Login"/>
+                <c:choose>
+                    <c:when test="#{userForm.isNew}">
+                        <b:inputText renderLabel="false" id="login" value="#{userForm.user.login}"
+                                     converter="#{uniqueLoginValidator}"/>
+                    </c:when>
+                    <c:otherwise>
+                        <b:inputText renderLabel="false" id="login" value="#{userForm.user.login}" disabled="true"/>
+                    </c:otherwise>
+                </c:choose>
+                <b:message for="login"/>
+
+                <p:outputLabel for="firstname" value="Jméno"/>
+                <b:inputText renderLabel="false" id="firstname" value="#{userForm.user.firstname}"/>
+                <b:message for="firstname"/>
+
+                <p:outputLabel for="lastname" value="Příjmení"/>
+                <b:inputText renderLabel="false" id="lastname" value="#{userForm.user.lastname}"/>
+                <b:message for="lastname"/>
+
+                <p:outputLabel for="address" value="Adresa"/>
+                <b:inputText renderLabel="false" id="address" value="#{userForm.user.address}"/>
+                <b:message for="address"/>
+
+                <p:outputLabel for="birthday" value="Datum narození"/>
+                <p:calendar renderLabel="false"
+                            id="birthday"
+                            value="#{userForm.user.birthday}"
+                            converter="NotFutureDateConverter"
+                            converterMessage="Zadejte platné datum (ne budoucnost) ve tvaru 15/4/2015."
+                            pattern="dd/MM/yyyy"
+                            navigator="true" />
+                <b:message for="birthday"/>
+
+
+                <p:outputLabel for="email" value="E-mail"/>
+                <b:inputText renderLabel="false" id="email" value="#{userForm.user.email}"
+                             converter="#{emailConverter}" tooltip="jméno@server"
+                />
+                <b:message for="email"/>
+
+
+                <p:outputLabel for="phone" value="Telefon"/>
+                <b:inputText renderLabel="false" id="phone" value="#{userForm.user.phone}"
+                             converter="#{phoneNumberConverter}" tooltip="(+xxx) xxx xxx xxx"/>
+                <b:message for="phone"/>
+
+                <p:outputLabel for="password" value="Heslo"/>
+                <b:inputText renderLabel="false" type="password" id="password" converter="#{passwordConverter}"
+                             required="#{userForm.isNew}"
+                             tooltip="Heslo musí mít alespoň #{passwordConverter.minLength} znaků"
+                             requiredMessage="Musíte zadat heslo" value="#{userForm.user.password}"/>
+                <b:message for="password"/>
+
+                <p:outputLabel for="type" value="Typ"/>
+                <h:selectOneListbox id="type" value="#{userForm.user.type}" required="true"
+                                    requiredMessage="Musíte zvolit roli">
+                    <f:selectItems
+                            value="#{employeeTypeConverter.types}"
+                    />
+                </h:selectOneListbox>
+                <b:message for="type"/>
+
+            </b:panelGrid>
+
+            <b:commandButton styleClass="action-button"
+                             icon="ok"
+                             look="success"
+                             action="#{editUserController.save}"
+                             value="Uložit"/>
+
+            <b:button styleClass="action-button"
+                      icon="remove"
+                      look="danger"
+                      value="Zrušit" outcome="list-users"/>
+        </b:form>
+    </ui:define>
+</ui:composition>

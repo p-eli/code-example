@@ -1,0 +1,83 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        template="template.xhtml">
+    <ui:define name="content">
+
+        <b:growl id="growl" globalOnly="true"/>
+        <div class="page_title">
+            Šablony testů
+        </div>
+        <b:form>
+            <b:panelGrid columns="1" styleClass="filter-grid">
+                <h:selectOneMenu value="#{testTypeFilter.checkingInterval}">
+                    <f:facet name="prepend">
+                        <b:iconAwesome name="list" title="form of address"/>
+                    </f:facet>
+                    <f:selectItem itemValue="-1" itemLabel="Interval kontroly"/>
+                    <f:selectItems value="#{testTypeDatatable.checkingIntervalAll}" var="currentTestType"
+                                   itemValue="#{currentTestType}" itemLabel="#{currentTestType}"/>
+                    <f:ajax listener="#{testTypeDatatable.refresh}" render=":frmTestType @form"/>
+                </h:selectOneMenu>
+            </b:panelGrid>
+        </b:form>
+
+        <b:form id="frmTestType">
+            <b:dataTable value="#{testTypeDatatable.values}" var="test_type" styleClass="show-table"
+                         customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Czech.json">
+
+                <h:column sortBy="#{test_type.id}" class="table_id">
+                    <f:facet name="header">ID šablony testu</f:facet>
+                    #{test_type.id}
+                </h:column>
+
+                <h:column sortBy="#{test_type.name}" class="table_item">
+                    <f:facet name="header">Název šablony</f:facet>
+                    #{test_type.name}
+                </h:column>
+
+                <h:column sortBy="#{test_type.checkingInterval}" class="table_item">
+                    <f:facet name="header">Interval kontroly [dny]</f:facet>
+                    #{test_type.checkingInterval}
+                </h:column>
+
+                <h:column class="table_item">
+                    <f:facet name="header">&#160;</f:facet>
+                    <b:commandButton action="#{testTypeParameterController.showTestTypeParameter(test_type.id)}"
+                                     look="info"
+                                     value="Zobrazit šablonu"
+                                     styleClass="table_button"/>
+
+                    <b:commandButton value=""
+                                     icon="edit"
+                                     look="warning"
+                                     id="edit-button"
+                                     styleClass="table_button"
+                                     action="#{editTestTypeController.showTestTypeEdit(test_type.id)}"
+                                     disabled="#{!(authenticationBean.admin)}"/>
+
+                    <b:commandButton value=""
+                                     icon="trash"
+                                     look="danger"
+                                     id="delete-button"
+                                     styleClass="table_button"
+                                     action="#{testTypeController.remove(test_type)}"
+                                     disabled="#{!(authenticationBean.admin)}"/>
+                </h:column>
+
+            </b:dataTable>
+        </b:form>
+        <b:form>
+            <b:commandButton id="lnkHidden" value="Přidat novou šablonu testu"
+                             styleClass="action-button"
+                             look="primary"
+                             icon="plus"
+                             action="#{editTestTypeController.showTestTypeEdit()}"
+                             disabled="#{!(authenticationBean.admin)}"/>
+        </b:form>
+    </ui:define>
+    <ui:param name="pageTitle" value="airport"/>
+</ui:composition>

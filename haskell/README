@@ -1,0 +1,51 @@
+Project: SUBS-CIPHER
+Author: Jakub Pelikán
+Login:  xpelik14
+Date:  8.3.2016
+
+Automatizované testy:
+    Spuštění : make tests
+    Testují chování programu při:
+        -databázi obsahující pouze samostatné znaky
+        -databázi obsahující pouze samostatné znaky a diagramy
+        -databází obsahující samostatné znaky, diagramy a triagramy
+           -test vypíše - originální klíč kterým byl zašifrován vstup
+                        - šifrovací klíč vytvořený programem
+                        - statistiku: počet shodných znaků klíču \ počet znaků v klíči
+                        - statistiku: počet shodných znaků v originálním nezakódovaném souboru a dešifrovaném souboru \ celkový počet znaků v souboru
+                            - procentuální shodnost originálního nezakódovaného vstupu a dešifrovaného vstupu
+        -chybějících, nevalidních nebo nevalidních kombinacích parametrů
+        -neexistujícím souboru
+        -prázdné a špatně formátované databázi
+        -prázdném vstupu
+
+
+
+Algoritmus:
+    1. Zpracování databáze.
+    2. Zpracování vstupního souboru, a pro samostatné znaky, diagramy a triagramy se vypočte frekvence výskytu
+        a přepočte se na procenta.
+    3. Pro nejčastějsí samostatný znak se nalezne v databázi nejčastější samostatný znak.
+    4. Pro druhý nejčastějsí samostatný znak se nalezne v databázi druhý nejčastější samostatný znak.
+    5. K nejčastějšímu diagramu se v databázi vyhledá množina diagramů, které mají podobnou frekvenci výskytu*
+        a nekolidují jejich jednotlivé znaky s již dešifrovanými znaky.
+        Z nalezené množiny se vybere diagram následovně:
+                - Jestliže jeden ze znaků diagramu je již ve slovníku, tak se porovnají neznáme znaky všech dvojic
+                    s databází jednotlivých znaků a vybere se ten, který ma nejvyšší frekvenci.
+                - Jestliže ani jeden ze znaků diagramu není ve slovníku, vybere se diagram s nejvyšší četností.
+    6. Vybere se nejčastější triagram a vyhledá se k němu nejčastější triagram v databázi,
+        jehož jednotlivé symboly nekolidují s již dešifrovanými znaky.
+    7. Z množiny diagramů a triagramů se vyjme nejčastější diagram a triagram. Pokud jsou množiny diagrmů
+        a triagramů vyčerpány, pak se postupně prochází množina samostatných znaků a pro nejčastější
+         nedešifrovaný znak se hledá v databázI nejčastější nedešifrovaný znak.
+        Pokud nejsou množiny diagramů a triagramů vyčerpány, pokračuje se bodem 5.
+
+
+*Podobná frekvence výskytu, je taková frekvence, která je o X% vyšší/nižší jak frekvence výskytu dané dvojice.
+      - Standardně se používá X=50%, kdy při této hodnotě má nejlepší výsledky jak použití databáze jen s jednotlivými
+        znaky a digramy tak i databáze s trigramy. Při snižování této hodnoty se zhoršují výsledky databáze s trigramy
+        a při zvyšování se zhoršují výsledky databáze bez trigramů.
+      - Hodnotu X lze, regulovat pomocí parametru  '-p' [presnost], kde přesnost '0.5' reprezentuje 50%.
+
+Přidané parametry:
+    -p [presnost] - viz. výše

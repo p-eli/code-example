@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+ File: demo.html
+ Autor: Jakub Pelikan
+ Login: xpelik14
+ Project: Tabulka s dynamickými sloupci a řádky
+-->
+<html>
+    <head>
+        <title>XPELIK14 - Tabulka s dynamickými sloupci a řádky</title>
+        <meta charset="UTF-8">
+        <script src="dynamicTable.js"></script> 
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div>
+            <table id="table_1">
+                <thead>
+                    <tr>
+                        <th>A</th>
+                        <th colspan="2">B</th>
+                        <th>C</th>
+                        <th rowspan="2">D</th>
+                        <th>E</th>
+                    </tr>
+                    <tr>
+                        <th>A0</th>
+                        <th>B0</th>
+                        <th>B00</th>
+                        <th>C0</th>
+                        <th>E0</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A1</td>
+                        <td>B1</td>
+                        <td>B11</td>
+                        <td>C1</td>
+                        <td>D1</td>
+                        <td>E1</td>
+                    </tr>
+                    <tr>
+                        <td>A2</td>
+                        <td colspan="2" rowspan="2">B2</td>
+                        <td>C2</td>
+                        <td>D2</td>
+                        <td>E2</td>
+                    </tr>
+                    <tr>
+                        <td>A3</td>
+                        <td>C3</td>
+                        <td>D3</td>
+                        <td rowspan="2">E3</td>
+                    </tr>
+                    <tr>
+                        <td>A4</td>
+                        <td>B4</td>
+                        <td>B44</td>
+                        <td>C4</td>
+                        <td>D4</td>
+                    </tr>
+                    <tr>
+                        <td>A5</td>
+                        <td>B5</td>
+                        <td>B55</td>
+                        <td>C5</td>
+                        <td>D5</td>
+                        <td>E5</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <script>
+                autoInitDynamicTables();
+            </script>
+            
+        </div>
+    </body>
+</html>

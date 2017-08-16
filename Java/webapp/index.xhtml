@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="template.xhtml">
+    <ui:define name="content">
+        <f:metadata>
+            <f:param id="user" value="#{authenticationBean.user}"/>
+            <f:event type="preRenderView" listener="#{authenticationBean.preRenderViewEvent}"/>
+        </f:metadata>
+
+        <div id="login-form">
+            <div id="login-form-header">Letiště</div>
+            <h1>Pro zahájení se prosím přihlašte</h1>
+            <ui:debug hotkey="x"/>
+            <b:form>
+                <b:panelGrid columns="1">
+                    <h:outputLabel id="login_username" rendered="false" value="Login"/>
+                    <b:inputText value="#{authenticationBean.login}" tabindex="0">
+                        <f:facet name="prepend">
+                            <b:icon name="user"/>
+                        </f:facet>
+                    </b:inputText>
+
+                    <h:outputLabel id="login_password" rendered="false" value="Password"/>
+                    <b:inputSecret value="#{authenticationBean.password}">
+                        <f:facet name="prepend">
+                            <b:icon name="lock"/>
+                        </f:facet>
+                    </b:inputSecret>
+
+                    <h:commandButton action="#{authenticationBean.actionLogin}" value="Přihlásit"/>
+                </b:panelGrid>
+            </b:form>
+
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

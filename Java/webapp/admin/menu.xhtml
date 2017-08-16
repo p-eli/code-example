@@ -1,0 +1,39 @@
+<ui:composition lang="en"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form styleClass="main-menu">
+        <p:menubar overlay="true" trigger="triggerButton" my="left top" at="right top">
+            <p:submenu label="Uživatelé">
+                <p:menuitem styleClass="submenu_item" value="Vytvořit uživatele"
+                            disabled="#{!(authenticationBean.admin)}" action="#{editUserController.create}"/>
+                <p:menuitem styleClass="submenu_item" value="Seznam uživatelů" outcome="list-users"/>
+            </p:submenu>
+
+            <p:submenu label="Letadla">
+                <p:menuitem styleClass="submenu_item" value="Vytvořit nové letadlo"
+                            action="#{editPlaneController.showPlaneEdit}"
+                            disabled="#{!(authenticationBean.admin)}"/>
+                <p:menuitem styleClass="submenu_item" value="Seznam letadel" action="#{planeController.showPlane}"/>
+            </p:submenu>
+
+            <p:submenu label="Typy letadel">
+                <p:menuitem styleClass="submenu_item" value="Vytvořit nový typ"
+                            action="#{editPlaneModelController.showPlaneModelEdit}"
+                            disabled="#{!(authenticationBean.admin)}"/>
+                <p:menuitem styleClass="submenu_item" value="Seznam typů"
+                            action="#{planeModelController.showPlaneModel}"/>
+            </p:submenu>
+
+            <p:submenu label="Testy">
+                <p:menuitem styleClass="submenu_item" value="Seznam šablon testů"
+                            action="#{testTypeController.showTestType()}"/>
+                <p:menuitem styleClass="submenu_item" value="Seznam testů" action="#{testController.showTests}"/>
+                <p:menuitem styleClass="submenu_item" value="Vyplnit test letadla"
+                            action="#{testCreateController.create}" disabled="#{!(authenticationBean.technician)}"/>
+            </p:submenu>
+        </p:menubar>
+    </h:form>
+</ui:composition>

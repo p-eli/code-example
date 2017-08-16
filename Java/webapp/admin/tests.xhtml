@@ -1,0 +1,115 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        template="template.xhtml">
+    <ui:param name="pageTitle" value="airport"/>
+    <ui:define name="content">
+        <b:growl id="growl" globalOnly="true"/>
+        <c:choose>
+            <c:when test="#{testFilter.isForMultiplePlanes()}">
+                <div class="page_title">
+                    Provedené testy
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="page_title">
+                    Provedené testy letadla <h:outputText value="#{testsDatatable.plane.serialNumber}"/>
+                </div>
+            </c:otherwise>
+        </c:choose>
+
+        <b:form styleClass="filter-form">
+            <b:panelGrid columns="4" styleClass="filter-grid">
+                <p:outputLabel for="dateMin" value="Testy od data:"/>
+                <p:calendar id="dateMin" value="#{testFilter.dateMin}"
+                            pattern="dd/MM/yyyy" navigator="true"
+                            converterMessage="Please enter a valid date. For example 15/4/2015.">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    <p:ajax event="dateSelect" listener="#{testsDatatable.refresh}" update=":frmtests @form"/>
+                </p:calendar>
+                <p:outputLabel for="dateMax" value="DO:"/>
+                <p:calendar id="dateMax" value="#{testFilter.dateMax}"
+                            pattern="dd/MM/yyyy" navigator="true"
+                            converterMessage="Please enter a valid date. For example 15/4/2015.">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    <p:ajax event="dateSelect" listener="#{testsDatatable.refresh}" update=":frmtests @form"/>
+                </p:calendar>
+            </b:panelGrid>
+
+            <h:selectOneMenu value="#{testFilter.status}">
+                <f:selectItem itemValue="" itemLabel="Platnost testu"/>
+                <f:selectItems value="#{testsDatatable.statusList}" var="status" itemValue="#{status}"
+                               itemLabel="#{status}"/>
+                <f:ajax listener="#{testsDatatable.refresh}" render=":frmtests @form"/>
+            </h:selectOneMenu>
+
+            <h:selectOneMenu value="#{testFilter.technician}">
+                <f:selectItem itemValue="-1" itemLabel="Jméno technika"/>
+                <f:selectItems value="#{testsDatatable.technicians}" var="technician" itemValue="#{technician.left}"
+                               itemLabel="#{technician.right}"/>
+                <f:ajax listener="#{testsDatatable.refresh}" render=":frmtests @form"/>
+            </h:selectOneMenu>
+
+            <b:commandButton styleClass="action-button"
+                             look="primary"
+                             action="#{testController.clearFilter()}"
+                             value="Zrušit filter"/>
+        </b:form>
+
+
+        <b:form id="frmtests">
+            <b:dataTable value="#{testsDatatable.values}" var="test"
+                         styleClass="show-table"
+                         customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Czech.json">
+
+                <h:column sortBy="#{test.id}" styleClass="table_id">
+                    <f:facet name="header">ID testu</f:facet>
+                    #{test.id}
+                </h:column>
+
+                <h:column sortBy="#{test.type.name}" styleClass="table_item">
+                    <f:facet name="header">Název testu</f:facet>
+                    #{test.type.name}
+                </h:column>
+
+                <h:column sortBy="#{test.date}" styleClass="table_item">
+                    <f:facet name="header">Datum provedení</f:facet>
+                    #{test.date}
+                </h:column>
+
+                <h:column sortBy="#{test.technician.fullName}" styleClass="table_item">
+                    <f:facet name="header">Technik</f:facet>
+                    #{test.technician.fullName}
+                </h:column>
+
+                <h:column sortBy="#{test.plane.serialNumber}" styleClass="table_item">
+                    <f:facet name="header">S/N Letadla</f:facet>
+                    #{test.plane.serialNumber}
+                </h:column>
+
+                <h:column styleClass="table_item">
+                    <f:facet name="header">&#160;</f:facet>
+                    <b:commandButton
+                            styleClass="table_button"
+                            value="Zobrazit"
+                            look="info"
+                            action="#{planeResultController.show(test)}"/>
+
+                    <b:commandButton value=""
+                                     styleClass="table_button"
+                                     id="edit-button"
+                                     icon="edit"
+                                     look="warning"
+                                     disabled="#{!authenticationBean.technician}"
+                                     action="#{testCreateController.update(test)}"/>
+                </h:column>
+
+            </b:dataTable>
+        </b:form>
+    </ui:define>
+</ui:composition>

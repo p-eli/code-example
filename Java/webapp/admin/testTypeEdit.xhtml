@@ -1,0 +1,55 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        template="template.xhtml">
+    <ui:param name="pageTitle" value="db.entity.TestType"/>
+    <ui:define name="content">
+
+        <c:choose>
+            <c:when test="#{testTypeForm.testTypeId == -1}">
+                <div class="page_title">
+                    Přídání nové šablony testu
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="page_title">
+                    Editace šablony testu <h:outputText value="#{testTypeForm.testType.id}"/>
+                </div>
+            </c:otherwise>
+        </c:choose>
+
+
+        <b:form id="frmTestTypeNew" styleClass="edit-form">
+            <b:panelGrid columns="3">
+                <p:outputLabel for="id" value="ID"/>
+                <b:inputText renderLabel="false" id="id" value="#{testTypeForm.testType.id}" readonly="true"/>
+                <b:message for="id"/>
+
+                <p:outputLabel for="name" value="Název testu"/>
+                <b:inputText renderLabel="false" id="name" value="#{testTypeForm.testType.name}"/>
+                <b:message for="name"/>
+
+                <p:outputLabel for="checkingInterval" value="Interval kontroly [dny]"/>
+                <b:inputText renderLabel="false" id="checkingInterval"
+                             value="#{testTypeForm.testType.checkingInterval}"/>
+                <b:message for="checkingInterval"/>
+
+
+            </b:panelGrid>
+            <b:commandButton styleClass="action-button"
+                             icon="ok"
+                             look="success"
+                             action="#{editTestTypeController.save}"
+                             value="Uložit"/>
+            <b:button styleClass="action-button"
+                      icon="remove"
+                      look="danger"
+                      value="Zrušit"
+                      outcome="cancel"/>
+        </b:form>
+    </ui:define>
+</ui:composition>

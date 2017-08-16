@@ -1,0 +1,98 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        template="template.xhtml">
+    <ui:param name="pageTitle" value="db.entity.Plane"/>
+    <ui:define name="content">
+        <c:choose>
+            <c:when test="#{planeForm.planeId == -1}">
+                <div class="page_title">
+                    Přídání nového letadla
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="page_title">
+                    Editace letadla <h:outputText value="#{planeForm.plane.id}"/>
+                </div>
+            </c:otherwise>
+        </c:choose>
+        <b:form id="editPlaneForm" styleClass="edit-form">
+            <b:panelGrid columns="6">
+                <!--<h:outputLabel value="Model"/>-->
+                <h:selectOneMenu value="#{planeModelFilter.manufacturer}">
+                    <f:selectItem itemValue="" itemLabel="Výrobce"/>
+                    <f:selectItems value="#{planeModelDatatable.manufacturerAll}" var="currentPlane"
+                                   itemValue="#{currentPlane}" itemLabel="#{currentPlane}"/>
+                    <f:ajax listener="#{planeModelDatatable.refresh}" render=":editPlaneForm @form"/>
+                </h:selectOneMenu>
+
+                <h:selectOneMenu value="#{planeModelFilter.type}">
+                    <f:selectItem itemValue="" itemLabel="Typ Letadla"/>
+                    <f:selectItems value="#{planeModelDatatable.type}" var="currentPlaneType"
+                                   itemValue="#{currentPlane}" itemLabel="#{currentPlane}"/>
+                    <f:ajax listener="#{planeModelDatatable.refresh}" render=":editPlaneForm @form"/>
+                </h:selectOneMenu>
+
+                <h:selectOneMenu value="#{planeModelFilter.capacity}">
+                    <f:selectItem itemValue="-1" itemLabel="Kapacita"/>
+                    <f:selectItems value="#{planeModelDatatable.capacity}" var="currentPlaneType"
+                                   itemValue="#{currentPlane}" itemLabel="#{currentPlane}"/>
+                    <f:ajax listener="#{planeModelDatatable.refresh}" render=":editPlaneForm @form"/>
+                </h:selectOneMenu>
+
+                <h:selectOneMenu value="#{planeModelFilter.enginePower}">
+                    <f:selectItem itemValue="-1" itemLabel="Výkon motoru"/>
+                    <f:selectItems value="#{planeModelDatatable.enginePower}" var="currentPlaneType"
+                                   itemValue="#{currentPlane}" itemLabel="#{currentPlane}"/>
+                    <f:ajax listener="#{planeModelDatatable.refresh}" render=":editPlaneForm @form"/>
+                </h:selectOneMenu>
+
+                <h:outputText value="Specifikujte typ" styleClass="warning"
+                              rendered="#{!(editPlaneController.validateModel())}"/>
+
+            </b:panelGrid>
+
+
+            <b:panelGrid columns="3">
+                <p:outputLabel for="id" value="ID"/>
+                <b:inputText renderLabel="false" id="id" value="#{planeForm.plane.id}" readonly="true"/>
+                <b:message for="id"/>
+
+                <p:outputLabel for="flyingHours" value="Letové hodiny"/>
+                <b:inputText renderLabel="false" id="flyingHours" value="#{planeForm.plane.flyingHours}"/>
+                <b:message for="flyingHours"/>
+
+                <p:outputLabel for="serialNumber" value="Sériové číslo"/>
+                <b:inputText renderLabel="false" id="serialNumber" value="#{planeForm.plane.serialNumber}"/>
+                <b:message for="serialNumber"/>
+
+                <p:outputLabel for="dateOfManufacture" value="Datum výroby"/>
+                <p:calendar renderLabel="false" id="dateOfManufacture" value="#{planeForm.plane.dateOfManufacture}"
+                            pattern="dd/MM/yyyy" navigator="true"
+                            converterMessage="Zadejte platné datum ve tvaru 15/4/2015.">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </p:calendar>
+                <b:message for="dateOfManufacture"/>
+            </b:panelGrid>
+
+
+            <b:commandButton styleClass="action-button"
+                             icon="ok"
+                             look="success"
+                             action="#{editPlaneController.save}"
+                             value="Uložit"
+                             disabled="#{!(editPlaneController.validateModel())}"/>
+            <b:button styleClass="action-button"
+                      icon="remove"
+                      look="danger"
+                      value="Zrušit"
+                      outcome="cancel"/>
+
+        </b:form>
+    </ui:define>
+</ui:composition>

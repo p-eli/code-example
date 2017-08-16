@@ -1,0 +1,58 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        template="template.xhtml">
+    <ui:param name="pageTitle" value="db.entity.TestTypeParameter"/>
+    <ui:define name="content">
+
+        <c:choose>
+            <c:when test="#{testTypeParameterForm.testTypeParameterId == -1}">
+                <div class="page_title">
+                    Přídání nového parametru do šablony testu
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="page_title">
+                    Editace parametru šablony testu <h:outputText
+                        value="#{testTypeParameterForm.testTypeParameter.id}"/>
+                </div>
+            </c:otherwise>
+        </c:choose>
+
+
+        <b:form id="frmTestTypeParameterNew" styleClass="edit-form">
+            <b:panelGrid columns="3">
+
+                <p:outputLabel for="checkingValue" value="Popis operace"/>
+                <b:inputText renderLabel="false" id="checkingValue"
+                             value="#{testTypeParameterForm.testTypeParameter.checkingValue}"/>
+                <b:message for="checkingValue"/>
+
+                <p:outputLabel for="min" value="Min. povolená hodnota"/>
+                <b:inputText renderLabel="false" id="min" value="#{testTypeParameterForm.testTypeParameter.min}"/>
+                <b:message for="min"/>
+
+                <p:outputLabel for="max" value="Max. povolená hodnota"/>
+                <b:inputText renderLabel="false" id="max" value="#{testTypeParameterForm.testTypeParameter.max}"/>
+                <b:message for="max"/>
+            </b:panelGrid>
+
+            <b:commandButton
+                    styleClass="action-button"
+                    icon="ok"
+                    look="success"
+                    action="#{editTestTypeParameterController.save}"
+                    value="Uložit"/>
+
+            <b:button styleClass="action-button"
+                      icon="remove"
+                      look="danger"
+                      value="Zrušit"
+                      outcome="cancel"/>
+        </b:form>
+    </ui:define>
+</ui:composition>

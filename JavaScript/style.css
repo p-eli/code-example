@@ -1,0 +1,45 @@
+/* 
+ * File: style.css
+ * Autor: Jakub Pelikan
+ * Login: xpelik14
+ * Project: Tabulka s dynamickými sloupci a řádky
+ */
+
+html, body {
+    width: 100%;
+    margin: 0;
+}
+
+table {
+    /*Table margin*/
+    margin: 0 auto;
+    margin-top: 100px; 
+    /*Disable text select*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+table, th, td {
+    /*Table and cells border*/
+    border: 1px solid black;
+    /*Table and cells collapse type*/
+    border-collapse: collapse;
+    /*Table text align*/
+    text-align: center;
+}
+
+th, td {
+    /*Table cells defautl size*/
+    width: 70px;
+    height: 30px;
+    min-width:60px;
+}
+
+th {
+    /*Table header background color*/
+    background-color: burlywood;
+    /*Table header font color*/
+    color: white;
+}
+

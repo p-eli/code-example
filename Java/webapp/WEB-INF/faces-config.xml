@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file is not required if you don't need any extra configuration. -->
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+    <!-- Add test type Edit Page -->
+    <navigation-rule>
+        <from-view-id>/admin/testTypeEdit.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{editTestTypeController.save}</from-action>
+            <if>#{not facesContext.isValidationFailed()}</if>
+            <to-view-id>/admin/testTypes.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cancel</from-outcome>
+            <to-view-id>/admin/testTypes.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <!-- Add test type parameter Edit Page -->
+    <navigation-rule>
+        <from-view-id>/admin/testTypeParameterEdit.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{editTestTypeParameterController.save}</from-action>
+            <if>#{not facesContext.isValidationFailed()}</if>
+            <to-view-id>/admin/testTypeParameter.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cancel</from-outcome>
+            <to-view-id>/admin/testTypeParameter.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+
+    <!-- Add plane type Edit Page -->
+    <navigation-rule>
+        <from-view-id>/admin/planeModelEdit.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{editPlaneModelController.save}</from-action>
+            <if>#{not facesContext.isValidationFailed()}</if>
+            <to-view-id>/admin/planeModel.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cancel</from-outcome>
+            <to-view-id>/admin/planeModel.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <!-- Add plane Edit Page -->
+    <navigation-rule>
+        <from-view-id>/admin/planeEdit.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{editPlaneController.save}</from-action>
+            <if>#{not facesContext.isValidationFailed()}</if>
+            <to-view-id>/admin/plane.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cancel</from-outcome>
+            <to-view-id>/admin/plane.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+
+    <navigation-rule>
+        <display-name>login.xhtml</display-name>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/admin/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+
+    <navigation-rule>
+        <display-name>index.html</display-name>
+        <from-view-id>/admin/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/admin/users.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+
+    <!-- Users                                                             -->
+    <navigation-rule>
+        <from-view-id>/admin/users.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>create</from-outcome>
+            <to-view-id>/admin/user-create-edit.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>update</from-outcome>
+            <to-view-id>/admin/user-create-edit.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>list</from-outcome>
+            <to-view-id>/admin/users.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/admin/user-create-edit.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>list</from-outcome>
+            <to-view-id>/admin/users.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>failed</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/admin/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
+
+    <!-- Main admin menu -->
+    <navigation-rule>
+        <from-view-id>/admin/*</from-view-id>
+
+        <navigation-case>
+            <from-outcome>list-users</from-outcome>
+            <to-view-id>/admin/users.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/admin/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>create-user</from-outcome>
+            <to-view-id>/admin/user-create-edit.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>plane-test-result</from-outcome>
+            <to-view-id>/admin/plane-test-result.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>fill-test</from-outcome>
+            <to-view-id>/admin/create-update-test.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>planeModelNew</from-outcome>
+            <to-view-id>/admin/planeModelEdit.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+
+        <navigation-case>
+            <from-outcome>list-tests</from-outcome>
+            <to-view-id>/admin/tests.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>list-test-types</from-outcome>
+            <to-view-id>/admin/testTypes.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>new-test-type</from-outcome>
+            <to-view-id>/admin/testTypeEdit.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>list-test-type-parameter</from-outcome>
+            <to-view-id>/admin/testTypeParameter.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>new-test-type-parameter</from-outcome>
+            <to-view-id>/admin/testTypeParameterEdit.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>list-airplanes</from-outcome>
+            <to-view-id>/admin/plane.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>new-airplanes</from-outcome>
+            <to-view-id>/admin/planeEdit.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>list-airplanes-model</from-outcome>
+            <to-view-id>/admin/planeModel.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>new-airplanes-model</from-outcome>
+            <to-view-id>/admin/planeModelEdit.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

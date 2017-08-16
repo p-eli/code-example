@@ -1,0 +1,478 @@
+.employee-table {
+    border-collapse: collapse;
+}
+
+.employee-table td, .employee-table th {
+    padding: 4px;
+    border: 1px solid #CCC;
+}
+
+html {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #ebebeb;
+}
+
+body {
+    margin: 0px auto 20px auto;
+    max-width: 1200px;
+    text-align: left;
+    background: #ebebeb;
+}
+
+.content_body {
+    padding: 30px;
+    background: white;
+    border-bottom: 2px solid #c6c6c6;
+    border-top: 2px solid #c6c6c6;
+    font-size: 12px;
+}
+
+.required::after {
+    content: "*";
+    color: red;
+}
+
+.show-table {
+    text-align: center;
+}
+
+.edit-form {
+
+}
+
+.table_button {
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.table_id {
+    width: 40px;
+    text-align: center;
+}
+
+.table_item {
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.table_outdate_item {
+    background-color: red;
+    color: black;
+}
+
+.table_actual_item {
+    background-color: green;
+    color: black;
+}
+
+.text_button {
+
+}
+
+/*chybova hlaska pri nevyplneni typu modelu u pridani letadla*/
+.warning {
+    color: red;
+}
+
+/*nadpis stranky*/
+.page_title {
+    font-size: 50px;
+}
+
+.valid-result {
+    color: green;
+}
+
+.invalid-result {
+    color: red;
+}
+
+.protocol-buttons {
+    font-size: 0.8em;
+    float: right;
+    padding: 5px;
+}
+
+.protocol-buttons a {
+    margin: 5px;
+}
+
+#login-form {
+    border: 1px solid #ffffff;
+    padding: 20px;
+    margin: 40px auto 40px auto;
+    width: 300px;
+    background-color: #f8f8f8;
+    border-radius: 4px;
+    box-shadow: 0px 2px 10px #d1d1d1;
+}
+
+#login-form h1 {
+    font-size: 12px;
+    color: #666666;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+#login-form input {
+    width: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+    font-size: 14px;
+    color: #414141;
+}
+
+#login-form label {
+    font-size: 25px;
+    color: transparent;
+}
+
+input {
+    width: 100%;
+}
+
+#login-form .messages {
+    font-weight: bold;
+}
+
+#login-form input[type="submit"] {
+    width: 100%;
+    height: auto;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    background-color: #00a65a;
+    border: 0px;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#login-form-header {
+    width: 100%;
+    height: 70px;
+    background: url(img/logo.png) no-repeat center;
+    background-size: auto 50px;
+    font-size: 0px;
+    margin-bottom: 35px;
+}
+
+.main-menu {
+
+}
+
+.main-menu .ui-menu {
+    width: 100%;
+    padding: 0.0em;
+    position: relative;
+    outline: 0 none;
+    color: white;
+    height: 65px;
+}
+
+.main-menu .ui-menu, .ui-menu .ui-menu-child {
+    background-color: #464646;
+}
+
+.main-menu .ui-menu .ui-menuitem-text {
+    float: left;
+    font-size: 13px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 19px;
+}
+
+.main-menu .ui-widget-content a {
+    color: #6c6b69;
+}
+
+.main-menu .ui-menubar .ui-menuitem-link {
+    width: auto;
+}
+
+.main-menu .ui-menu .ui-menuitem-link {
+    display: block;
+    outline: none;
+    text-decoration: none;
+    font-weight: 400;
+    float: left;
+    line-height: 35px;
+    cursor: pointer;
+    border-right: 1px solid #eaeaea;
+}
+
+.main-menu .ui-menu, .ui-menu .ui-menu-child {
+    background: #fff none;
+}
+
+.main-menu .ui-icon {
+    display: block;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    margin-top: 25px;
+}
+
+.main-menu .ui-state-hover, .main-menu .ui-widget-content .ui-state-hover {
+    border: 0px;
+    background: transparent none;
+    box-shadow: none;
+    filter: none;
+    border-bottom: 2px solid #ff5742;
+    border-right: 1px solid #eaeaea;
+    color: #000000;
+}
+
+.main-menu .ui-widget-header .ui-state-hover,
+.main-menu .ui-state-focus, .main-menu .ui-widget-content .ui-state-focus, .main-menu .ui-widget-header .ui-state-focus {
+    border: 0px;
+    background: transparent none;
+    box-shadow: none;
+    filter: none;
+    color: #000000;
+}
+
+.main-menu .submenu_item:hover {
+    border: 0px;
+    background: transparent none;
+    box-shadow: none;
+    filter: none;
+    border: none;
+    color: #000000;
+}
+
+.main-menu .submenu_item .ui-menuitem-text {
+    float: left;
+    font-size: 13px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 0px;
+}
+
+.main-menu .submenu_item {
+    border: 0px;
+    background: transparent none;
+    box-shadow: none;
+    filter: none;
+    border: none;
+}
+
+.main-menu .ui-menu .submenu_item {
+    border: none;
+}
+
+.main-menu .ui-widget {
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+.main-menu .ui-corner-all {
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.main-menu .ui-widget-content {
+    border: 0px solid #464646;
+    background: white;
+    color: black;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #c6c6c6;
+}
+
+/*box s informaci o prihlaseni*/
+#login-info {
+    padding-bottom: 15px;
+    padding-top: 15px;
+    font-size: 12px;
+    text-align: right;
+    font-weight: 600;
+    background: #02b98a;
+    color: white;
+    padding-right: 15px;
+    margin-top: 15px;
+    border-top: 2px solid #079570
+}
+
+#login_info_name {
+    font-weight: 300;
+    margin-right: 5px;
+}
+
+.page_title {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.ui-inputfield {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.ui-inputfield:hover, .ui-inputfield:active {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+.ui-widget {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td, .ui-datatable tfoot th {
+    padding: 0px;
+    overflow: hidden;
+    border: 1px solid;
+}
+
+.datatable-button {
+    margin-right: 5px;
+}
+
+/*tlacitka mimo tabulku*/
+.action-button {
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+/*pokud je jednoduchej grid*/
+.filter-grid {
+    margin-bottom: 20px;
+}
+
+/*slozitejsi filter i s tlacitky atd..*/
+.filter-form {
+    margin-bottom: 20px;
+}
+
+.edit-form {
+    padding: 20px;
+    background-color: white;
+    border-bottom: 2px solid #c6c6c6;
+    border-top: 2px solid #c6c6c6;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media print {
+    .no-print,
+    .main-menu,
+    #login-info,
+    .dataTables_filter,
+    .test-values th,
+    .dataTables_info,
+    .dataTables_length,
+    .pagination {
+        display: none;
+    }
+
+    .content_body {
+        border: 0;
+    }
+
+    html {
+        padding-right: 10px;
+    }
+    h1 a {
+        display: none;
+    }
+}
+
+.ui-menuitem-text {
+    white-space: nowrap
+}
+
+.shortcut-button {
+    font-size: 60px;
+    width: 100px;
+    height: 100px;
+    margin: 15px;
+}
+
+.shortcut-well {
+    text-align: center;
+    background: none;
+    border-radius: 0px;
+    padding: 40px;
+}
+
+.shortcut-well .shortcut-icon {
+    margin-bottom: 30px;
+}
+
+select {
+    padding: 6px 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+    color: #555555;
+    font-size: 14px;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.logout-button {
+    background: none;
+    border: none;
+    margin: -20px auto -20px 10px;
+}
+
+#home-img {
+    display: block;
+    width: 150px;
+    height: auto;
+    /*    margin:-10px -3px -20px;
+        padding:-10px 0px;*/
+}
+
+.well {
+    border: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    box-shadow: none;
+}
+
+.well button {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 40px 0px;
+    margin: 10px;
+}
+
+.col-md-4 {
+    display: block;
+    padding-right: 10px;
+}
+
+button[disabled="disabled"] {
+    filter: grayscale(30%);
+    opacity: 0.4 !important;
+}
+
+.ui-menu .ui-menu-parent .ui-menu-child {
+    width: auto !important;
+}

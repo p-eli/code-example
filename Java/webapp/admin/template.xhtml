@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+>
+<h:head>
+    <script type="text/javascript" src="../error.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>#{pageTitle}</title>
+    <link rel="stylesheet" type="text/css" href="../application.css"/>
+</h:head>
+<h:body>
+    <h1><h:link outcome="home"> <img src="../img/logo.png" id="home-img"/></h:link></h1>
+    <h:form id="login-info">
+        <span id="login_info_name">Přihlášen:</span>
+        <h:outputText value="#{authenticationBean.user}"/>
+        <b:commandButton value="" styleClass="logout-button" icon="log-out" look="danger"
+                         action="#{authenticationBean.actionLogout}"/>
+    </h:form>
+
+    <ui:include src="menu.xhtml"/>
+
+    <div class="content_body">
+        <ui:insert name="content"/>
+    </div>
+
+
+</h:body>
+</html>

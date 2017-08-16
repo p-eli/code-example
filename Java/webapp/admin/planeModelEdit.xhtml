@@ -1,0 +1,60 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        template="template.xhtml">
+    <ui:param name="pageTitle" value="db.entity.PlaneModel"/>
+    <ui:define name="content">
+
+        <c:choose>
+            <c:when test="#{planeModelForm.planeModelId == -1}">
+                <div class="page_title">
+                    Přídání nového typu letadla
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="page_title">
+                    Editace typu letadla <h:outputText value="#{planeModelForm.planeModel.id}"/>
+                </div>
+            </c:otherwise>
+        </c:choose>
+
+
+        <b:form id="frmPlaneTypeNew" styleClass="edit-form">
+            <b:panelGrid columns="3">
+                <p:outputLabel for="id" value="ID"/>
+                <b:inputText renderLabel="false" id="id" value="#{planeModelForm.planeModel.id}" readonly="true"/>
+                <b:message for="id"/>
+
+                <p:outputLabel for="capacity" value="Kapacita"/>
+                <b:inputText renderLabel="false" id="capacity" value="#{planeModelForm.planeModel.capacity}"/>
+                <b:message for="capacity"/>
+
+                <p:outputLabel for="enginePower" value="Výkon motoru (kW)"/>
+                <b:inputText renderLabel="false" id="enginePower" value="#{planeModelForm.planeModel.enginePower}"/>
+                <b:message for="enginePower"/>
+
+                <p:outputLabel for="manufacturer" value="Výrobce"/>
+                <b:inputText renderLabel="false" id="manufacturer" value="#{planeModelForm.planeModel.manufacturer}"/>
+                <b:message for="manufacturer"/>
+
+                <p:outputLabel for="type" value="Typ Letadla"/>
+                <b:inputText renderLabel="false" id="type" value="#{planeModelForm.planeModel.type}"/>
+                <b:message for="type"/>
+            </b:panelGrid>
+
+            <b:commandButton styleClass="action-button"
+                             look="success"
+                             icon="ok"
+                             action="#{editPlaneModelController.save}"
+                             value="Uložit"/>
+            <b:button styleClass="action-button"
+                      look="danger"
+                      icon="remove"
+                      value="Zrušit" outcome="cancel"/>
+        </b:form>
+    </ui:define>
+</ui:composition>

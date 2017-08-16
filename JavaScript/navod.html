@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+ File: navod.html
+ Autor: Jakub Pelikan
+ Login: xpelik14
+ Project: Tabulka s dynamickými sloupci a řádky
+-->
+<html>
+    <head>
+        <title>XPELIK14 - Tabulka s dynamickými sloupci a řádky</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <article>
+                <header>
+                    <h1>Dokumentace - Tabulka s dynamickými sloupci a řádky</h1>
+                    <h2>Jakub Pelikán - xpelik14</h2>
+                </header>
+                <br>
+                <p>
+                <ul>
+                    <li>
+                        Použití skriptu:
+                        <ol>
+                            <li>
+                                Vložení skriptu do hlavičky html souboru:
+                                <br>&nbsp; &lt;script src="dynamicTable.js"&gt;&lt;&sol;script&gt;
+                            </li>
+                            <li>
+                                Vložení volání funkce pro zadání ID tabulky na konec HTML dokumentu:
+                                <br>
+                                <ul>
+                                    <li>
+                                        Manuální zadání ID tabulky pomocí funkce initDynamicTable:
+                                        <br>&nbsp; &lt;script&gt;initDynamicTable(id)&lt;&sol;script&gt;
+                                    </li>
+                                    <li>
+                                        Automatická inicializace, která zavolá funkci initDynamicTable pro všechny tabulky v dokumentu, které mají zadáno ID, pomocí funkce autoInitDynamicTables:
+                                        <br>&nbsp; &lt;script&gt;autoInitDynamicTables()&lt;&sol;script&gt;
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <br>
+                    </li>
+                    
+                    <li>
+                        Činnost skriptu:
+                        <ul>
+                            <li>
+                                Změna šířky sloupců a výšky řádků.
+                            </li>
+                            <li>
+                                Změna velikosti celé tabulky, pomocí tažení za rohy tabulky.
+                            </li>
+                            <li>
+                                Změna pořadí sloupců pomocí prohození libovolných dvou sloupců mezi sebou.
+                            </li>
+                            <li>
+                                Změna pořadí sloupců pomocí přesunutí libovolného sloupce před/za jiný.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </article>
+        </div>
+    </body>
+</html>
